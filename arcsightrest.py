@@ -19,7 +19,7 @@ class ArcsightLogger(object):
     Main Class to interact with Arcsight Logger REST API
     """
 
-    TARGET = 'https://SOMETHING:9000'
+    TARGET = 'https://TARGET:9000'
 
     def __init__(self, username, password, disable_insecure_warning=False):
         """
@@ -45,7 +45,8 @@ class ArcsightLogger(object):
             currentdt += datetime.timedelta(*args)
         (dt, micro) = currentdt.strftime('%Y-%m-%dT%H:%M:%S.%f').split('.')
         tz_offset = currentdt.astimezone(tzlocal()).strftime('%z')
-        tz_offset = "Z" if tz_offset == "" else tz_offset[:3] + ":" + tz_offset[3:]
+        tz_offset = "Z" if tz_offset == "" else tz_offset[
+                                                :3] + ":" + tz_offset[3:]
 
         dt = "%s.%03d%s" % (dt, int(micro) / 1000, tz_offset)
         return dt
@@ -78,14 +79,22 @@ class ArcsightLogger(object):
                  for other functions, and the content of HTTP response.
         """
         search_id = int(round(time.time() * 1000))
-        response = self._post(
-            '/server/search', data={
-                'query': query,
-                'search_session_id': search_id,
-                'user_session_id': self.token,
-                'start_time': self.format_time(),
-                'end_time': self.format_time(*args)
-            })
+        if len(args) > 0:
+            response = self._post(
+                '/server/search', data={
+                    'query': query,
+                    'search_session_id': search_id,
+                    'user_session_id': self.token,
+                    'start_time': self.format_time(),
+                    'end_time': self.format_time(*args)
+                })
+        else:
+            response = self._post(
+                '/server/search', data={
+                    'query': query,
+                    'search_session_id': search_id,
+                    'user_session_id': self.token,
+                })
 
         return search_id, response.json()
 
@@ -136,13 +145,14 @@ class ArcsightLogger(object):
                 'user_session_id': self.token
             })
         events = response.json()
-
+        if not events:
+            return 'Search result was empty'
         if not custom_format:
             return events
         return [{
-            field['name']: result
-            for field, result in zip(events['fields'], results)
-            } for results in events['results']]
+                    field['name']: result
+                    for field, result in zip(events['fields'], results)
+                    } for results in events['results']]
 
     def histogram(self, search_id):
         """
