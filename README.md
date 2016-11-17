@@ -16,14 +16,14 @@ import arcsightrest
 #### Setting the location of the ArcSight Logger
 Set the TARGET to the ip or hostname of the Arcsight logger
 ```python
-arcsightrest.ArcsightLogger.TARGET = 'https://IPADDRESS:9000'
+ArcsightLogger.TARGET = 'https://IPADDRESS:9000'
 ```
 #### Logging in
 Logging in. Storing of the token is done by the library, The last
 option is optional, if this is True it will ignore all SSL warnings (
 if you have not imported the SSL certificate, this is default to False
 ```python
-arcsightrest.ArcsightLogger('USERNAME', 'PASSWORD', True)
+ArcsightLogger('USERNAME', 'PASSWORD', True)
 ```
 #### Searching
 The search function will return 2 values, first the search_id that has
@@ -113,6 +113,6 @@ According to the ArcSight documentation, each function also support optional par
 Here search_id is the only required field (except user token, but that is handled by the library).
 So if you find a specific parameter to a REST call in the ArcSight documentation, it will always work in this library.
 ```python
-chart_data(search_id, length=NUMBER, offsett=NUMBER)
+chart_data(search_id, length=NUMBER, offset=NUMBER)
 ```
 
