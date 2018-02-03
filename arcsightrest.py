@@ -33,7 +33,7 @@ class ArcsightLogger(object):
                 'password': password,
             }, is_json=False)
         r.raise_for_status()
-        loginrequest = untangle.parse(r.content)
+        loginrequest = untangle.parse(r.text)
         self.token = loginrequest.ns3_loginResponse.ns3_return.cdata
 
     def _post(self, route, data, is_json=True,):
