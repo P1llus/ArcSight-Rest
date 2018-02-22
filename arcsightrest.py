@@ -111,6 +111,22 @@ class ArcsightLogger(object):
         """
         while not self.search_complete(search_id):
             time.sleep(5)
+            print('still running')
+        response = self._post(
+            '/server/search/status', data=dict(
+                search_session_id=search_id,
+                user_session_id=self.token
+            ))
+        return response.json()
+
+    def status(self, search_id):
+        """
+        Checks the current status of a search using the search_id
+        :param search_id: The search_id that was generated
+                        when a new search was called
+        :return: Whether or not the search finished already.
+        """
+
         response = self._post(
             '/server/search/status', data=dict(
                 search_session_id=search_id,
@@ -239,4 +255,3 @@ class ArcsightLogger(object):
                 user_session_id=self.token
             ))
         return response
-
