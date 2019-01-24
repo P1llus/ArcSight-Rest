@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='loggersdk',
-    version='1.0',
+    version='2.0',
     description='Python library to connect to the HP Arcsight Logger REST API',
     author='Marius Iversen',
     license='MIT',
