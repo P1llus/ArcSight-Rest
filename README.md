@@ -12,7 +12,10 @@ with older releases.
 This is a python library to interact with the REST API that is offered on the Arcsight Logger
 
 ### Installation:
-
+Uninstall the old library with pip
+```sh
+$ pip uninstall arcsightrest
+```
 Install library with pip:
 ```sh
 $ pip install loggersdk
