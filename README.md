@@ -27,8 +27,11 @@ import loggersdk
 There is now new unofficial documentation for utilizing the ArcSight Logger API:
 
 [ArcSight Logger API Documentation, web based](https://github.com/arcsight-unofficial/arcsight-logger-api-documentation)
+
 [ArcSight Logger API Examples using Postman](https://github.com/arcsight-unofficial/arcsight-logger-api-examples)
+
 [ArcSight Logger API SDK implementation example](https://github.com/arcsight-unofficial/arcsight-logger-api-sdkexample)
+
 [ArcSight Logger API SDK](https://github.com/arcsight-unofficial/arcsight-logger-api-sdk)
 
 ### Optional Parameters for API requests:
